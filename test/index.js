@@ -5,7 +5,6 @@ const Code = require('code');
 const Lab = require('lab');
 
 const lab = exports.lab = Lab.script();
-const beforeEach = lab.beforeEach;
 const describe = lab.describe;
 const it = lab.it;
 const expect = Code.expect;
@@ -67,14 +66,9 @@ const internals = {
 
 describe('Registering the plugin', () => {
 
-    beforeEach((done) => {
+    internals.init();
 
-        internals.init();
-
-        return done();
-    });
-
-    it('Should create default SMTP transport object', (done) => {
+    it('Should register the plugin', (done) => {
 
         internals.register((err) => {
 

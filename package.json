@@ -2,7 +2,7 @@
   "name": "podo",
   "version": "0.1.0",
   "author": "Denmark Dionisio",
-  "description": "A simple hapijs plugin for creating PDF.",
+  "description": "A (super) simple hapijs plugin for creating PDF.",
   "keywords": [
     "hapi",
     "pdf",
