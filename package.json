@@ -1,0 +1,31 @@
+{
+  "name": "podo",
+  "version": "0.1.0",
+  "author": "Denmark Dionisio",
+  "description": "A simple hapijs plugin for creating PDF.",
+  "keywords": [
+    "hapi",
+    "pdf",
+    "pdfmake"
+  ],
+  "license": "MIT",
+  "repository": "git://github.com/Phenelo/podo",
+  "bugs": "https://github.com/Phenelo/podo/issues",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "test": "lab -c -v -L -a code"
+  },
+  "dependencies": {
+    "pdfmake": "0.1.x"
+  },
+  "devDependencies": {
+    "proxyquire": "1.7.x",
+    "hapi": "15.2.x",
+    "code": "4.0.x",
+    "lab": "11.1.x",
+    "coveralls": "2.11.x"
+  }
+}
