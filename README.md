@@ -18,10 +18,7 @@ server.register({
 ## Generate PDF
 ```js
 const definition = {
-    content: [
-        'well, here's a better question.',
-        'do you wanna have a bad time?'
-    ]
+    content: [ 'Long essay' ]
 },
 
 request.server.plugins.podo.generate(definition, (err, res) => {
