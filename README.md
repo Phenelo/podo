@@ -19,8 +19,8 @@ server.register({
 ```js
 const definition = {
     content: [
-        '* well, here's a better question.',
-        '* do you wanna have a bad time?'
+        'well, here's a better question.',
+        'do you wanna have a bad time?'
     ]
 },
 
