@@ -17,7 +17,6 @@ const Pdfmake = function () {
     this.createPdfKitDocument = () => {
 
         return {
-            setEncoding: () => {},
             on: (event, next) => {
 
                 if (event === 'data') {
@@ -30,7 +29,7 @@ const Pdfmake = function () {
             },
             end: () => {
 
-                data('Hello.');
+                data(new Buffer('Hello'));
 
                 return end();
             }
