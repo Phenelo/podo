@@ -5,6 +5,7 @@ const Code = require('code');
 const Lab = require('lab');
 
 const lab = exports.lab = Lab.script();
+const beforeEach = lab.beforeEach;
 const describe = lab.describe;
 const it = lab.it;
 const expect = Code.expect;
@@ -40,14 +41,16 @@ const Pdfmake = function () {
 const Podo = proxyquire('../lib', { pdfmake: Pdfmake });
 
 const internals = {
-    register: (next) => {
+    register: async function () {
 
-        internals.server.register({
-            register: Podo
-        }, (err) => {
-
-            return next(err);
-        });
+        try {
+            await internals.server.register({
+                plugin: Podo
+            });
+        }
+        catch (err) {
+            return Promise.reject(err);
+        }
     },
     definition: {
         content: [
@@ -55,26 +58,37 @@ const internals = {
             'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
         ]
     },
-    init: () => {
+    init: async function () {
 
         internals.server = new Hapi.Server();
-        internals.server.connection();
-        internals.server.initialize();
+        await internals.server.start();
     }
 };
 
 describe('Registering the plugin', () => {
 
-    internals.init();
+    beforeEach((done) => {
+
+        internals.init()
+            .then(() => {
+
+                return done;
+            });
+    });
 
     it('Should register the plugin', (done) => {
 
-        internals.register((err) => {
+        internals.register()
+            .then(() => {
 
-            expect(err).to.not.exist();
+                return done;
+            })
+            .catch((err) => {
 
-            return done();
-        });
+                expect(err).to.not.exist();
+
+                return done;
+            });
     });
 });
 
@@ -82,12 +96,19 @@ describe('Creating a PDF', () => {
 
     it('Should create a PDF buffer', (done) => {
 
-        internals.server.plugins.podo.generate(internals.definition, (err, res) => {
+        internals.server.plugins.podo.generate(internals.definition)
+            .then((res) => {
 
-            expect(err).to.not.exist();
-            expect(res).to.exist();
+                expect(res).to.exist();
 
-            return done();
-        });
+                return done;
+            })
+            .catch((err) => {
+
+                expect(err).to.not.exist();
+
+                return done;
+            });
+
     });
 });
