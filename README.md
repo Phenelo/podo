@@ -7,11 +7,8 @@ A (super) simple hapijs plugin for generating PDF. Uses [pdfmake](http://pdfmake
 const Podo = require('podo');
 const server = new Hapi.Server();
 
-server.register({
-    register: Podo
-}, (err) => {
-
-      return next(err);
+await server.register({
+    plugin: Podo
 });
 ```
 
@@ -21,16 +18,15 @@ const definition = {
     content: [ 'Long essay' ]
 },
 
-request.server.plugins.podo.generate(definition, (err, res) => {
+request.server.plugins.podo.generate(definition)
+    .then((res) => {
 
-    if (err) {
-        console.log(err);
+        return res;
+    })
+    .catch((err) => {
 
-        return reply(err);
-    }
-
-    return reply(res);
-});
+        return err;
+    });
 ```
 See [pdfmake](http://pdfmake.org/) for more information.
 
