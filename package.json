@@ -19,7 +19,7 @@
     "test": "lab -c -v -L -a code"
   },
   "dependencies": {
-    "pdfmake": "^0.1.35"
+    "pdfmake": "^0.1.x"
   },
   "devDependencies": {
     "proxyquire": "1.8.x",
